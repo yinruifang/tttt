@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="./ajax.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<button id="btn">获取跨域数据</button>
+		<div id="box"></div>
+		<script type="text/javascript">
+			window.onload = function(){
+				var oBtn = document.getElementById('btn');
+				var oBox = document.getElementById('box');
+				oBtn.onclick = function(){
+					//http://127.0.0.1/phpajax/getNews.php 访问这个地址就跨域了 
+					ajax('get','http://127.0.0.1/phpajax/getNews1.php','',function(res){
+						console.log(res);
+						
+					});
+				}
+			}
+			
+			/*
+			跨域：因为浏览器的同源保护政策，导致不同的域名下面的数据不能够相互访问，所以就存在了跨域问题
+			跨域显示的效果：有可能域名不一样，有可能端口号不一样，有可能子域名不一样，这几种情况都会产生跨域
+			如果跨域，报错如下：
+			Access to XMLHttpRequest at 'http://127.0.0.1/phpajax/getNews.php' from origin 'http://127.0.0.1:8848' 
+			has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+			解决跨域的方法：
+			1.后台设置允许跨域的头部信息
+			2.jsonp  原理：script标签的src属性具有跨域能力；需要动态的创建script标签;需要注意，这种方式必须后台代码支持
+			
+			*/
+		</script>
+	</body>
+</html>

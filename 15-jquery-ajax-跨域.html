@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>jquery-ajax</title>
+		<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="box"></div>
+		<script type="text/javascript">
+			$(function(){
+				//ajax方式获取数据，
+				$.ajax({
+					type:'get',//请求方式
+					url:'http://127.0.0.1/phpajax/getNews2.php',//请求地址
+					data:{"user":"qqq","password":"123456"},//请求参数
+					contentType: "application/json;charset=UTF-8",//请求的媒体类型
+					async:true,//ajax是同步还是异步，true表示异步，false 表示同步
+					dataType:'jsonp',//设置成jsonp的话，就可以解决跨域问题
+					//请求成功的回调函数
+					success:function(res){
+						console.log(res);
+					},
+					error:function(err){
+						console.log("获取数据出错，错误码是："+err.status);
+					}
+				});
+			})
+		</script>
+	</body>
+</html>

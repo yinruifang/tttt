@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<!-- script标签的src属性本身就具有跨域能力
+		<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script> -->
+	</head>
+	<body>
+		<input type="text" id="txt" />
+		<button id="btn">搜索</button>
+		<div id="box"></div>
+		<script type="text/javascript">
+			var oBox = document.getElementById('box');
+			window.onload = function(){
+				var oBtn = document.getElementById('btn');
+				var oTxt = document.getElementById('txt');
+				oBtn.onclick = function(){
+					var domtext = oTxt.value;
+					//跨域获取数据
+					//动态创建script标签
+					var oScript = document.createElement('script');
+					oScript.src = "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd="+domtext+"&cb=JSON_yy";
+					//将script标签添加到header中
+					var oHead = document.getElementsByTagName('head')[0];
+					oHead.appendChild(oScript);
+				}
+			}
+			//获取数据
+			function JSON_yy(res){
+				console.log(res);
+				var str = '';
+				//注意：jsonp返回的数据是对象，不需要进行字符串转对象的操作
+				//var json = JSON.parse(res);
+				var jArr = res.s;
+				for(var i = 0;i<jArr.length;i++){
+					str += `<div>${jArr[i]}</div>`;
+					
+				}
+				oBox.innerHTML = str;
+			}
+		</script>
+	</body>
+</html>
